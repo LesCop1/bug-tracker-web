@@ -21,6 +21,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  deleteBug(bug: Bug): void {
+    this.bugs = this.bugs?.filter(b => b !== bug);
+  }
+
+  createBug(bug: Bug): void {
+    this.bugs?.push(bug);
+  }
+
   get todoBugs(): Bug[] | undefined {
     return this.bugs?.filter(b => b.progress === Progress.TODO);
   }

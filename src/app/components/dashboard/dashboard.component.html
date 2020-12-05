@@ -2,12 +2,12 @@
 <app-dashboard-filters></app-dashboard-filters>
 <div class="row">
   <div class="col-lg p-2">
-    <app-buglist title="To Do" [bugs]="todoBugs"></app-buglist>
+    <app-buglist title="To Do" [bugs]="todoBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="createBug($event)"></app-buglist>
   </div>
   <div class="col-lg p-2">
-    <app-buglist title="In Progress" [bugs]="doingBugs"></app-buglist>
+    <app-buglist title="In Progress" [bugs]="doingBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="createBug($event)"></app-buglist>
   </div>
   <div class="col-lg p-2">
-    <app-buglist title="Fixed" [bugs]="doneBugs"></app-buglist>
+    <app-buglist title="Fixed" [bugs]="doneBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="createBug($event)"></app-buglist>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Bug, Priority } from '../models/bug.model';
+import { Bug, Priority, Progress } from '../models/bug.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +14,8 @@ export class BugService {
     return this.http.get<Bug[]>('bugs');
   }
 
-  create(bug: Bug): Observable<Bug> {
-    return this.http.post<Bug>('bugs', bug);
+  create(title: string, description: string, priority?: Priority, progress?: Progress): Observable<Bug> {
+    return this.http.post<Bug>('bugs', {title, description, priority, progress});
   }
 
   get(id: number): Observable<Bug> {
