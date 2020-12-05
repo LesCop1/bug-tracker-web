@@ -69,6 +69,10 @@ export class AuthenticationService {
   private fetchCurrentUser(id: number): Observable<Developer> {
     return this.http.get<Developer>(`developers/${id}`).pipe(
       map((user: Developer) => {
+        if (!user) {
+          localStorage.removeItem('auth_token');
+        }
+
         this.currentUserSubject.next(user);
         return user;
       })
