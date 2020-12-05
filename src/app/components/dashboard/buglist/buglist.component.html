@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header">
+    <span class="lead">{{ title }}</span>
+  </div>
+  <div class="spinner-border mx-auto m-4" role="status" *ngIf="!bugs">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div class="card-body">
+    <div class="text-dark card mb-4" *ngFor="let b of bugs">
+      <div class="card-body">
+        <h5 class="card-title">{{ b.title }} <span class="badge" [class.badge-info]="b.priority === 'LOW'" [class.badge-warning]="b.priority === 'MEDIUM'" [class.badge-danger]="b.priority === 'HIGH'">{{ b.priority | titlecase }}</span></h5>
+        <p class="card-text">{{ b.description }}</p>
+      </div>
+      <div class="card-footer text-muted">Ajouté le {{ b.creationDate | date }}</div>
+    </div>
+  </div>
+  <div class="card-footer"></div>
+</div>
