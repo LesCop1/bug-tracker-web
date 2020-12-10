@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Create bug</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+  <div class="modal-body">
+    <div class="form-group" [ngClass]="displayFieldCss('title')">
+      <label for="title" class="control-label required">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title" />
+      <app-fielderrordisplay [displayError]="isFieldValid('title')" errorMsg="Please inform your title"> </app-fielderrordisplay>
+    </div>
+    <div class="form-group" [ngClass]="displayFieldCss('description')">
+      <label for="description" class="control-label required">Description</label>
+      <textarea class="form-control" id="description" formControlName="description"></textarea>
+      <app-fielderrordisplay [displayError]="isFieldValid('description')" errorMsg="Please inform your description"> </app-fielderrordisplay>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="priority" class="control-label">Priority</label>
+        <select [ngModel]="1" class="form-control" id="priority" formControlName="priority">
+          <option value="0">LOW</option>
+          <option value="1">MEDIUM</option>
+          <option value="2">HIGH</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="progress" class="control-label">State of progress</label>
+        <select [ngModel]="0" class="form-control" id="progress" formControlName="progress">
+          <option selected value="0">TODO</option>
+          <option value="1">DOING</option>
+          <option value="2">DONE</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
+    <button type="submit" class="btn btn-primary" >Submit</button>
+  </div>
+</form>
