@@ -16,6 +16,8 @@ import { DashboardFiltersComponent } from './components/dashboard/filters/filter
 import { BugListComponent } from './components/dashboard/buglist/buglist.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { CreatetaskComponent } from './components/dashboard/createtask/createtask.component';
+import { FieldErrorDisplayComponentComponent } from './components/dashboard/createtask/fielderrordisplay/fielderrordisplay.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
@@ -41,6 +43,8 @@ export function tokenGetter(): string | null {
     DashboardComponent,
     SigninComponent,
     SignupComponent,
+    CreatetaskComponent,
+    FieldErrorDisplayComponentComponent,
     DashboardFiltersComponent,
     BugListComponent,
     UsernameValidatorDirective
