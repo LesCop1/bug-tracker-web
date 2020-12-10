@@ -17,14 +17,13 @@ import { BugListComponent } from './components/dashboard/buglist/buglist.compone
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CreatetaskComponent } from './components/dashboard/createtask/createtask.component';
-import { FieldErrorDisplayComponentComponent } from './components/dashboard/createtask/fielderrordisplay/fielderrordisplay.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { ApiInterceptor } from './api/api.interceptor';
 
 import { Token } from './api/token.response';
-import { UsernameValidator, UsernameValidatorDirective } from './components/signup/username.validator';
+import { UsernameValidatorDirective } from './components/signup/username.validator';
 
 export function tokenGetter(): string | null {
   const storedToken = localStorage.getItem('auth_token');
@@ -44,10 +43,9 @@ export function tokenGetter(): string | null {
     SigninComponent,
     SignupComponent,
     CreatetaskComponent,
-    FieldErrorDisplayComponentComponent,
     DashboardFiltersComponent,
     BugListComponent,
-    UsernameValidatorDirective
+    UsernameValidatorDirective,
   ],
   imports: [
     BrowserModule,
@@ -65,11 +63,7 @@ export function tokenGetter(): string | null {
     }),
     NgBootstrapFormValidationModule.forRoot(),
   ],
-  providers: [
-    AuthenticationService,
-    UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
-  ],
+  providers: [AuthenticationService, UserService, { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

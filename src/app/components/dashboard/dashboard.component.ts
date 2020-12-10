@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Bug, Priority, Progress } from 'src/app/models/bug.model';
+import { Bug, Progress } from 'src/app/models/bug.model';
 import { BugService } from 'src/app/services/bug.service';
 
 @Component({
@@ -10,9 +10,7 @@ import { BugService } from 'src/app/services/bug.service';
 export class DashboardComponent implements OnInit {
   bugs?: Bug[];
 
-  constructor(private bugService: BugService) {
-
-  }
+  constructor(private bugService: BugService) {}
 
   ngOnInit(): void {
     this.bugService.getAll().subscribe((result: Bug[]) => {
@@ -22,22 +20,26 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteBug(bug: Bug): void {
-    this.bugs = this.bugs?.filter(b => b !== bug);
+    this.bugs = this.bugs?.filter((b) => b !== bug);
   }
 
   duplicateBug(bug: Bug): void {
     this.bugs?.push(bug);
   }
-  
+
+  createBug(bug: Bug): void {
+    this.bugs?.push(bug);
+  }
+
   get todoBugs(): Bug[] | undefined {
-    return this.bugs?.filter(b => b.progress === Progress.TODO);
+    return this.bugs?.filter((b) => b.progress === Progress.TODO);
   }
 
   get doingBugs(): Bug[] | undefined {
-    return this.bugs?.filter(b => b.progress === Progress.DOING);
+    return this.bugs?.filter((b) => b.progress === Progress.DOING);
   }
 
   get doneBugs(): Bug[] | undefined {
-    return this.bugs?.filter(b => b.progress === Progress.DONE);
+    return this.bugs?.filter((b) => b.progress === Progress.DONE);
   }
 }
