@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Bug } from 'src/app/models/bug.model';
 import { BugService } from 'src/app/services/bug.service';
+import { CreatetaskComponent } from '../createtask/createtask.component';
 
 @Component({
   selector: 'app-buglist',
@@ -14,8 +16,9 @@ export class BugListComponent implements OnInit {
 
   @Output() duplicateEvent = new EventEmitter<Bug>();
   @Output() deleteEvent = new EventEmitter<Bug>();
+  
 
-  constructor(private bugService: BugService) {}
+  constructor(private bugService: BugService, private modalService: NgbModal) {}
 
   ngOnInit(): void {}
 
@@ -29,5 +32,9 @@ export class BugListComponent implements OnInit {
     this.bugService.create(bug.title, bug.description, bug.priority, bug.progress).subscribe((duplicate: Bug) => {
       this.duplicateEvent.emit(duplicate);
     });
+  }
+
+  openCreateBugModal(): void {
+    this.modalService.open(CreatetaskComponent);
   }
 }

@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="card">
-  <div class="card-header">
-    <span class="lead">{{ title }}</span>
+  <div class="card-header bg-dark">
+    <span class="lead text-white">{{ title }}</span>
   </div>
   <div class="spinner-border mx-auto m-4" role="status" *ngIf="!bugs">
     <span class="sr-only">Loading...</span>
@@ -9,8 +10,15 @@
   <div class="card-body">
     <div class="card mb-4" *ngFor="let b of bugs">
       <div class="card-body">
-        <h5 class="card-title">{{ b.title }}
-          <span class="badge" [class.badge-info]="b.priority === 'LOW'" [class.badge-warning]="b.priority === 'MEDIUM'" [class.badge-danger]="b.priority === 'HIGH'">{{ b.priority | titlecase }}</span>
+        <h5 class="card-title">
+          {{ b.title }}
+          <span
+            class="badge"
+            [class.badge-info]="b.priority === 'LOW'"
+            [class.badge-warning]="b.priority === 'MEDIUM'"
+            [class.badge-danger]="b.priority === 'HIGH'"
+            >{{ b.priority | titlecase }}</span
+          >
           <div ngbDropdown class="d-flex float-right">
             <button class="py-0 btn btn-sm btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle></button>
             <div ngbDropdownMenu>
@@ -23,9 +31,11 @@
         <p class="card-text">{{ b.description }}</p>
       </div>
       <div class="card-footer">
-        <span class="text-muted">Ajouté le {{ b.creationDate | date: 'dd MMMM YYYY' }}</span>
+        <span class="text-muted">Ajouté le {{ b.creationDate | date: "dd MMMM YYYY" }}</span>
       </div>
     </div>
   </div>
-  <div class="card-footer"></div>
+  <div class="card-footer p-0">
+    <button type="button" class="btn" (click)="openCreateBugModal()"><span class="fa fa-plus"></span> Add Bug</button>
+  </div>
 </div>
