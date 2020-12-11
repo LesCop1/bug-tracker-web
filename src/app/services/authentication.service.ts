@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import { Developer } from '../models/developer.model';
@@ -68,11 +68,12 @@ export class AuthenticationService {
 
   private fetchCurrentUser(id: number): Observable<Developer> {
     return this.http.get<Developer>(`developers/${id}`).pipe(
+      catchError((err) => {
+        localStorage.removeItem('auth_token');
+        this.currentUserSubject.next(null);
+        return throwError(err);
+      }),
       map((user: Developer) => {
-        if (!user) {
-          localStorage.removeItem('auth_token');
-        }
-
         this.currentUserSubject.next(user);
         return user;
       })
