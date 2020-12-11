@@ -2,12 +2,12 @@
 <app-dashboard-filters></app-dashboard-filters>
 <div class="row">
   <div class="col-md-4 p-0">
-      <app-buglist title="To Do" [bugs]="todoBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="duplicateBug($event)" (createEvent)="createBug($event)"></app-buglist>
+      <app-buglist title="To Do" cdkDropList  #todo="cdkDropList" [cdkDropListConnectedTo]="[doing,done]" [cdkDropListData]="bugs" (cdkDropListDropped)="drop($event)" [bugs]="todoBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="duplicateBug($event)" (createEvent)="createBug($event)"></app-buglist>
   </div>
   <div class="col-md-4">
-      <app-buglist title="In Progress" [bugs]="doingBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="duplicateBug($event)" (createEvent)="createBug($event)"></app-buglist>
+      <app-buglist title="In Progress" cdkDropList  #doing="cdkDropList" [cdkDropListConnectedTo]="[todo,done]" [cdkDropListData]="bugs" (cdkDropListDropped)="drop($event)" [bugs]="doingBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="duplicateBug($event)" (createEvent)="createBug($event)"></app-buglist>
   </div>
   <div class="col-md-4 p-0">
-      <app-buglist title="Fixed" [bugs]="doneBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="duplicateBug($event)" (createEvent)="createBug($event)"></app-buglist>
+      <app-buglist title="Fixed" cdkDropList #done="cdkDropList" [cdkDropListConnectedTo]="[todo,doing]" [cdkDropListData]="bugs" (cdkDropListDropped)="drop($event)" [bugs]="doneBugs" (deleteEvent)="deleteBug($event)" (duplicateEvent)="duplicateBug($event)" (createEvent)="createBug($event)"></app-buglist>
   </div>
 </div>

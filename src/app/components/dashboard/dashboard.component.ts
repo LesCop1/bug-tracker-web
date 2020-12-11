@@ -1,3 +1,4 @@
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Bug, Progress } from 'src/app/models/bug.model';
 import { BugService } from 'src/app/services/bug.service';
@@ -29,6 +30,16 @@ export class DashboardComponent implements OnInit {
 
   createBug(bug: Bug): void {
     this.bugs?.push(bug);
+  }
+
+  drop(event: any): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      event.container.data.progress = event.previousContainer.data.progress;
+      alert(event.container.data.progress);
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
   }
 
   get todoBugs(): Bug[] | undefined {
