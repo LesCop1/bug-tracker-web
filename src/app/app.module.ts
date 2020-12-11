@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, NG_ASYNC_VALIDATORS, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,6 +22,7 @@ import { CreatetaskComponent } from './components/dashboard/createtask/createtas
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { ApiInterceptor } from './api/api.interceptor';
+
 
 import { Token } from './api/token.response';
 import { UsernameValidatorDirective } from './components/signup/username.validator';
@@ -52,6 +54,7 @@ export function tokenGetter(): string | null {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    DragDropModule,
     ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule,
