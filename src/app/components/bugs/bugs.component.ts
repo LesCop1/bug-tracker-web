@@ -1,14 +1,13 @@
-import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Bug, Progress } from 'src/app/models/bug.model';
 import { BugService } from 'src/app/services/bug.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-bugs',
+  templateUrl: './bugs.component.html',
+  styleUrls: ['./bugs.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class BugsComponent implements OnInit {
   bugs?: Bug[];
 
   constructor(private bugService: BugService) {}
@@ -21,25 +20,16 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteBug(bug: Bug): void {
-    this.bugs = this.bugs?.filter((b) => b !== bug);
-  }
-
-  duplicateBug(bug: Bug): void {
-    this.bugs?.push(bug);
+    this.bugs = this.bugs?.filter((b) => b.id !== bug.id);
   }
 
   createBug(bug: Bug): void {
     this.bugs?.push(bug);
   }
 
-  drop(event: any): void {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      event.container.data.progress = event.previousContainer.data.progress;
-      alert(event.container.data.progress);
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-    }
+  updateBug(bug: Bug): void {
+    this.deleteBug(bug);
+    this.createBug(bug);
   }
 
   get todoBugs(): Bug[] | undefined {

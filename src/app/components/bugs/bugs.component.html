@@ -1,0 +1,45 @@
+<h1 class="my-5">Bugs</h1>
+<div class="spinner-border mx-auto m-4" role="status" *ngIf="!bugs">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div class="row my-4">
+  <form>
+    <input class="form-control" type="search" placeholder="Search" />
+  </form>
+
+  <div class="dropdown show" ngbDropdown>
+    <a class="dropdown-toggle btn btn-link text-dark" id="dropdownMenuLink" ngbDropdownToggle>Filters</a>
+    <div class="dropdown-menu" ngbDropdownMenu>TODO</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 p-0" *ngIf="bugs">
+    <app-bugs-list
+      title="To Do"
+      [bugs]="todoBugs"
+      (deleteEvent)="deleteBug($event)"
+      (updateEvent)="updateBug($event)"
+      (createEvent)="createBug($event)"
+    ></app-bugs-list>
+  </div>
+  <div class="col-md-4" *ngIf="bugs">
+    <app-bugs-list
+      title="In Progress"
+      [bugs]="doingBugs"
+      (deleteEvent)="deleteBug($event)"
+      (updateEvent)="updateBug($event)"
+      (createEvent)="createBug($event)"
+    ></app-bugs-list>
+  </div>
+  <div class="col-md-4 p-0" *ngIf="bugs">
+    <app-bugs-list
+      title="Fixed"
+      [bugs]="doneBugs"
+      (deleteEvent)="deleteBug($event)"
+      (updateEvent)="updateBug($event)"
+      (createEvent)="createBug($event)"
+    ></app-bugs-list>
+  </div>
+</div>

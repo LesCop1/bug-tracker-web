@@ -5,7 +5,7 @@
   </button>
 </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
   <div class="modal-body">
     <div class="form-group">
       <label for="title" class="control-label required">Title</label>
@@ -36,6 +36,6 @@
   </div>
   <div class="modal-footer">
     <button type="reset" class="btn btn-secondary">Reset</button>
-    <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid" ngbAutofocus>Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid" ngbAutofocus>Submit</button>
   </div>
 </form>

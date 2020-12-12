@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, NG_ASYNC_VALIDATORS, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,12 +12,11 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardFiltersComponent } from './components/dashboard/filters/filters.component';
-import { BugListComponent } from './components/dashboard/buglist/buglist.component';
+import { BugsComponent } from './components/bugs/bugs.component';
+import { EnumNamePipe, ListComponent } from './components/bugs/list/list.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { CreatetaskComponent } from './components/dashboard/createtask/createtask.component';
+import { EditorComponent } from './components/bugs/editor/editor.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
@@ -41,13 +40,13 @@ export function tokenGetter(): string | null {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    BugsComponent,
     SigninComponent,
     SignupComponent,
-    CreatetaskComponent,
-    DashboardFiltersComponent,
-    BugListComponent,
+    EditorComponent,
+    ListComponent,
     UsernameValidatorDirective,
+    EnumNamePipe,
   ],
   imports: [
     BrowserModule,

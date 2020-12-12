@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" [ngbCollapse]="collapsed" id="navbarNav">
       <ul class="navbar-nav mr-auto" routerLinkActive="active" ngbNav>
         <li class="nav-item" ngbNavItem>
-          <a class="nav-link" routerLink="dashboard" ngbNavLink>Dashboard</a>
+          <a class="nav-link" routerLink="bugs" ngbNavLink>Bugs</a>
         </li>
         <li class="nav-item" ngbNavItem>
           <a class="nav-link" routerLink="users" ngbNavLink>Users</a>
@@ -42,16 +42,10 @@
               <span class="font-weight-normal">{{ currentUser.name }}</span>
               <span class="text-muted font-weight-light">@{{ currentUser.username }}</span>
             </div>
-            <button ngbDropdownItem>
-              <strong>Profile</strong>
-            </button>
+            <a class="dropdown-item" routerLink="profile" ngbDropdownItem>Profile</a>
             <div class="dropdown-divider"></div>
-            <button ngbDropdownItem>
-              <strong>Settings</strong>
-            </button>
-            <button (click)="signOut()" ngbDropdownItem>
-              <strong>Sign out</strong>
-            </button>
+            <a class="dropdown-item" routerLink="settings" ngbDropdownItem>Settings</a>
+            <a class="dropdown-item" routerLink="/" (click)="signOut()" ngbDropdownItem>Sign out</a>
           </div>
         </li>
       </ul>

@@ -1,23 +1,24 @@
 import { Developer } from './developer.model';
 
 export interface Bug {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   creationDate: Date;
-  priority?: Priority;
-  progress?: Progress;
+  priority: Priority;
+  progress: Progress;
+  author?: Developer;
   assignee?: Developer;
 }
 
 export enum Priority {
-  LOW = 'LOW',
-  MEDIUM = 'MEDIUM',
-  HIGH = 'HIGH',
+  LOW,
+  MEDIUM,
+  HIGH,
 }
 
 export enum Progress {
-  TODO = 'TODO',
-  DOING = 'DOING',
-  DONE = 'DONE',
+  TODO,
+  DOING,
+  DONE,
 }
