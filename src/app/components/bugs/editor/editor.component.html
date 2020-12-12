@@ -33,6 +33,20 @@
         </select>
       </div>
     </div>
+    <div class="form-group">
+      <label for="typeahead">Assignee :</label>
+      <input
+        id="typeahead"
+        type="text"
+        class="form-control"
+        formControlName="assignee"
+        [ngbTypeahead]="search"
+        [inputFormatter]="formatter"
+        [resultFormatter]="formatter"
+        [editable]="false"
+        required
+      />
+    </div>
   </div>
   <div class="modal-footer">
     <button type="reset" class="btn btn-secondary">Reset</button>

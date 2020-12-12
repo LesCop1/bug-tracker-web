@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, Pipe, PipeTransform, TemplateRef } from '@angular/core';
-import { EditorComponent } from '../editor/editor.component';
+import { BugEditorComponent } from '../editor/editor.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Bug, Priority } from 'src/app/models/bug.model';
-import { BugService } from 'src/app/services/bug.service';
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { DeleteModalComponent } from '../../modals/delete/delete.component';
 
 @Component({
   selector: 'app-bugs-list',
@@ -22,52 +22,16 @@ export class ListComponent {
 
   faPlus = faPlus;
 
-  constructor(private bugService: BugService, private modalService: NgbModal) {}
-
-  deleteBug(confirmModal: TemplateRef<any>, bug: Bug): void {
-    const modal = this.modalService.open(confirmModal);
-
-    modal.result
-      .then((result) => {
-        if (result && bug.id) {
-          this.bugService.delete(bug.id).subscribe(() => {
-            this.deleteEvent.emit(bug);
-          });
-        }
-      })
-      .catch();
-  }
-
-  duplicateBug(bug: Bug): void {
-    const modal = this.modalService.open(EditorComponent);
-
-    modal.componentInstance.bug = bug;
-    modal.result.then((edited: Bug) => {
-      this.bugService.create({ ...bug, ...edited }).subscribe((created) => {
-        this.createEvent.emit(created);
-      });
-    });
-  }
-
-  editBug(bug: Bug): void {
-    const modal = this.modalService.open(EditorComponent);
-
-    modal.componentInstance.bug = bug;
-    modal.result.then((edited: Bug) => {
-      this.bugService.update({ ...bug, ...edited }).subscribe(() => {
-        this.updateEvent.emit({ ...bug, ...edited });
-      });
-    });
-  }
+  constructor(private modalService: NgbModal) {}
 
   openCreateBugModal(): void {
-    const modal = this.modalService.open(EditorComponent);
+    const modal = this.modalService.open(BugEditorComponent);
 
-    modal.result.then((bug: Bug) => {
-      this.bugService.create(bug).subscribe((created) => {
-        this.createEvent.emit(created);
-      });
-    });
+    modal.result
+      .then((bug: Bug) => {
+        this.createEvent.emit(bug);
+      })
+      .catch();
   }
 
   priorityBadgeClass(bug: Bug): any {

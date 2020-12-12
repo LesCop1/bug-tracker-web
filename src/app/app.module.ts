@@ -16,7 +16,7 @@ import { BugsComponent } from './components/bugs/bugs.component';
 import { EnumNamePipe, ListComponent } from './components/bugs/list/list.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { EditorComponent } from './components/bugs/editor/editor.component';
+import { BugEditorComponent } from './components/bugs/editor/editor.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
@@ -25,6 +25,11 @@ import { ApiInterceptor } from './api/api.interceptor';
 
 import { Token } from './api/token.response';
 import { UsernameValidatorDirective } from './components/signup/username.validator';
+import { UsersComponent } from './components/users/users.component';
+import { DeleteModalComponent } from './components/modals/delete/delete.component';
+import { UserEditorComponent } from './components/users/editor/editor.component';
+import { ProfileComponent } from './components/users/profile/profile.component';
+import { DetailsComponent } from './components/bugs/details/details.component';
 
 export function tokenGetter(): string | null {
   const storedToken = localStorage.getItem('auth_token');
@@ -43,10 +48,15 @@ export function tokenGetter(): string | null {
     BugsComponent,
     SigninComponent,
     SignupComponent,
-    EditorComponent,
+    BugEditorComponent,
     ListComponent,
     UsernameValidatorDirective,
     EnumNamePipe,
+    UsersComponent,
+    UserEditorComponent,
+    DeleteModalComponent,
+    ProfileComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

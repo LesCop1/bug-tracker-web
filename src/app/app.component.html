@@ -8,15 +8,12 @@
     </button>
 
     <div class="collapse navbar-collapse" [ngbCollapse]="collapsed" id="navbarNav">
-      <ul class="navbar-nav mr-auto" routerLinkActive="active" ngbNav>
+      <ul class="navbar-nav mr-auto" ngbNav>
         <li class="nav-item" ngbNavItem>
-          <a class="nav-link" routerLink="bugs" ngbNavLink>Bugs</a>
+          <a class="nav-link" routerLink="/bugs" routerLinkActive="active" ngbNavLink>Bugs</a>
         </li>
         <li class="nav-item" ngbNavItem>
-          <a class="nav-link" routerLink="users" ngbNavLink>Users</a>
-        </li>
-        <li class="nav-item" ngbNavItem>
-          <a class="nav-link" routerLink="settings" ngbNavLink>Settings</a>
+          <a class="nav-link" routerLink="/users" routerLinkActive="active" ngbNavLink>Users</a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -30,7 +27,7 @@
           <a class="nav-link py-0 profile d-inline-flex flex-row-reverse flex-md-row" id="navbarDropdown" role="button" ngbDropdownToggle>
             <span class="d-flex flex-column text-md-right">
               <span class="font-weight-normal">{{ currentUser.name }}</span>
-              <span class="text-muted font-weight-light">@{{ currentUser.username }}</span>
+              <small class="text-muted font-weight-light">@{{ currentUser.username }}</small>
             </span>
             <span class="ml-md-3 mr-3 align-self-center">
               <img class="border border-dark rounded-circle" src="https://picsum.photos/32" alt="" />
@@ -40,11 +37,10 @@
             <div class="px-4 py-2 d-flex flex-column align-items-center">
               <img class="border border-dark rounded-circle" src="https://picsum.photos/64" alt="" />
               <span class="font-weight-normal">{{ currentUser.name }}</span>
-              <span class="text-muted font-weight-light">@{{ currentUser.username }}</span>
+              <small class="text-muted font-weight-light">@{{ currentUser.username }}</small>
             </div>
-            <a class="dropdown-item" routerLink="profile" ngbDropdownItem>Profile</a>
+            <a class="dropdown-item" [routerLink]="['users', currentUser.username]" ngbDropdownItem>Profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" routerLink="settings" ngbDropdownItem>Settings</a>
             <a class="dropdown-item" routerLink="/" (click)="signOut()" ngbDropdownItem>Sign out</a>
           </div>
         </li>

@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Edit User</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="id" class="control-label required">ID</label>
+      <input type="text" class="form-control" id="id" formControlName="id" required />
+    </div>
+    <div class="form-group">
+      <label for="username" class="control-label required">Username</label>
+      <input type="text" class="form-control" id="username" formControlName="username" required />
+    </div>
+    <div class="form-group">
+      <label for="name" class="control-label required">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="password" class="control-label required">Password</label>
+      <input type="text" class="form-control" id="password" formControlName="password" required />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid" ngbAutofocus>Submit</button>
+  </div>
+</form>

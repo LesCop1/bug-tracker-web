@@ -17,8 +17,16 @@ export class UserService {
     return this.http.post<Developer>('developers', dev);
   }
 
-  get(id: number): Observable<Developer> {
-    return this.http.get<Developer>(`developers/${id}`);
+  update(dev: Developer): Observable<any> {
+    return this.http.put(`developers/${dev.id}`, dev);
+  }
+
+  getById(id: number): Observable<Developer> {
+    return this.http.get<Developer>(`developers/id/${id}`);
+  }
+
+  getByUsername(username: string): Observable<Developer> {
+    return this.http.get<Developer>(`developers/username/${username}`);
   }
 
   delete(id: number): Observable<any> {

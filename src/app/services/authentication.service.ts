@@ -8,6 +8,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Developer } from '../models/developer.model';
 import { Token } from '../api/token.response';
 import { SignupResponse } from '../api/signup.response';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<Developer>;
 
-  constructor(private http: HttpClient, private jwt: JwtHelperService) {
+  constructor(private http: HttpClient, private userService: UserService, private jwt: JwtHelperService) {
     this.currentUserSubject = new BehaviorSubject<any>(null);
     this.currentUser = this.currentUserSubject.asObservable();
 
@@ -67,7 +68,7 @@ export class AuthenticationService {
   }
 
   private fetchCurrentUser(id: number): Observable<Developer> {
-    return this.http.get<Developer>(`developers/${id}`).pipe(
+    return this.userService.getById(id).pipe(
       catchError((err) => {
         localStorage.removeItem('auth_token');
         this.currentUserSubject.next(null);

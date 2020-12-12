@@ -1,0 +1,44 @@
+<div class="row mt-4" *ngIf="!loaded">
+  <div class="spinner-border mx-auto m-4" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="row mt-4" *ngIf="bug">
+  <div class="col-9">
+    <div class="jumbotron">
+      <h1 class="display-4">Overview</h1>
+      <p class="lead">
+        {{ bug?.title }} <span class="card-text badge" [class]="priorityBadgeClass(bug)">{{ bug.priority | enumName | titlecase }}</span>
+      </p>
+      <hr class="my-4" />
+      <p>{{ bug?.description }}</p>
+      <p class="lead">
+        <button class="btn btn-outline-info" (click)="editBug(bug)"><fa-icon [icon]="faPen"></fa-icon> Edit</button>
+        <button class="ml-2 btn btn-outline-danger" (click)="deleteBug(bug)"><fa-icon [icon]="faTrash"></fa-icon> Delete</button>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Statistics</h4>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h6 class="card-text">Creation date :</h6>
+          <p class="text-muted">{{ bug?.creationDate | date: "dd MMMM YYYY" }}</p>
+        </li>
+        <li class="list-group-item">
+          <h6 class="card-text">Created by :</h6>
+          <p *ngIf="bug?.assignee">{{ bug?.author }}</p>
+          <small *ngIf="!bug?.author" class="text-muted font-weight-light">System</small>
+        </li>
+        <li class="list-group-item">
+          <h6 class="card-text">Assigned to :</h6>
+          <p *ngIf="bug?.assignee">{{ bug?.assignee }}</p>
+          <small *ngIf="!bug?.assignee" class="text-muted font-weight-light">No Assignee</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

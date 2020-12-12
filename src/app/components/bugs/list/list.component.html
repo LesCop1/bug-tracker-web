@@ -1,47 +1,23 @@
 <div class="card">
   <div class="card-body">
-    <h6 class="card-title mb-2">
+    <h6 class="card-title">
       <span class="text-muted">{{ title | uppercase }}</span>
       <span class="badge ml-2 badge-secondary">{{ bugs?.length }}</span>
     </h6>
-    <div class="card my-4" *ngFor="let bug of bugs">
-      <ng-template #confirmModal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">Confirm delete</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this bug ? This action is irreversible !</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" (click)="modal.close(false)">Cancel</button>
-          <button type="button" class="btn btn-danger" ngbAutofocus (click)="modal.close(true)">Delete</button>
-        </div>
-      </ng-template>
-
-      <div class="card-body pt-3 px-3 pb-2">
+    <div class="card mt-4" *ngFor="let bug of bugs" cdkDrag>
+      <div class="card-body">
         <h5 class="card-title">
-          <span class="text-muted">{{ bug.title }}</span>
-          <span class="badge mx-2" [class]="priorityBadgeClass(bug)">{{ bug.priority | enumName | titlecase }}</span>
-          <div ngbDropdown class="d-flex float-right">
-            <button class="py-0 btn btn-sm btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle></button>
-            <div ngbDropdownMenu>
-              <a class="dropdown-item" (click)="editBug(bug)" ngbDropdownItem>Modifier</a>
-              <a class="dropdown-item" (click)="duplicateBug(bug)" ngbDropdownItem>Dupliquer</a>
-              <a class="dropdown-item" (click)="deleteBug(confirmModal, bug)" ngbDropdownItem>Supprimer</a>
-            </div>
-          </div>
+          <a class="text-muted stretched-link" [routerLink]="['/bugs', bug.id]">{{ bug.title }}</a>
         </h5>
+        <span class="card-text badge" [class]="priorityBadgeClass(bug)">{{ bug.priority | enumName | titlecase }}</span>
         <p class="card-text">{{ bug.description }}</p>
         <div class="d-flex justify-content-end">
           <div *ngIf="bug.assignee">
-            <span class="font-weight-normal">{{ bug.assignee.name }}</span>
+            <small class="font-weight-normal">{{ bug.assignee.name }}</small>
             <img class="border ml-2 rounded-circle" src="https://picsum.photos/24" alt="" />
           </div>
           <div *ngIf="!bug.assignee">
-            <span class="text-muted font-weight-light">No Assignee</span>
+            <small class="text-muted font-weight-light">No Assignee</small>
           </div>
         </div>
       </div>

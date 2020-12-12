@@ -1,7 +1,7 @@
 import { Developer } from './developer.model';
 
 export interface Bug {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   creationDate: Date;

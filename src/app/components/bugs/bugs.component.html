@@ -1,45 +1,69 @@
 <h1 class="my-5">Bugs</h1>
-<div class="spinner-border mx-auto m-4" role="status" *ngIf="!bugs">
-  <span class="sr-only">Loading...</span>
-</div>
-
-<div class="row my-4">
-  <form>
-    <input class="form-control" type="search" placeholder="Search" />
-  </form>
-
-  <div class="dropdown show" ngbDropdown>
-    <a class="dropdown-toggle btn btn-link text-dark" id="dropdownMenuLink" ngbDropdownToggle>Filters</a>
-    <div class="dropdown-menu" ngbDropdownMenu>TODO</div>
+<div class="row" *ngIf="!loaded">
+  <div class="spinner-border mx-auto m-4" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4 p-0" *ngIf="bugs">
-    <app-bugs-list
-      title="To Do"
-      [bugs]="todoBugs"
-      (deleteEvent)="deleteBug($event)"
-      (updateEvent)="updateBug($event)"
-      (createEvent)="createBug($event)"
-    ></app-bugs-list>
+<div class="container-fluid" *ngIf="loaded">
+  <div class="row">
+    <div class="col">
+      <form class="form-inline" [formGroup]="filterForm">
+        <input class="form-control" type="search" formControlName="name" placeholder="Search a bug..." />
+
+        <!--<div class="dropdown show" ngbDropdown>
+          <a class="dropdown-toggle btn btn-link text-dark" id="dropdownMenuLink" ngbDropdownToggle>Filters</a>
+          <div class="dropdown-menu" ngbDropdownMenu>TODO</div>
+        </div>-->
+      </form>
+    </div>
   </div>
-  <div class="col-md-4" *ngIf="bugs">
-    <app-bugs-list
-      title="In Progress"
-      [bugs]="doingBugs"
-      (deleteEvent)="deleteBug($event)"
-      (updateEvent)="updateBug($event)"
-      (createEvent)="createBug($event)"
-    ></app-bugs-list>
-  </div>
-  <div class="col-md-4 p-0" *ngIf="bugs">
-    <app-bugs-list
-      title="Fixed"
-      [bugs]="doneBugs"
-      (deleteEvent)="deleteBug($event)"
-      (updateEvent)="updateBug($event)"
-      (createEvent)="createBug($event)"
-    ></app-bugs-list>
+
+  <div class="row my-4">
+    <div class="col-md-4">
+      <app-bugs-list
+        title="To Do"
+        cdkDropList
+        cdkDropListSortingDisabled
+        #todo="cdkDropList"
+        [cdkDropListConnectedTo]="[doing, done]"
+        [cdkDropListData]="todoBugs"
+        (cdkDropListDropped)="drop($event, 0)"
+        [bugs]="todoBugs"
+        (deleteEvent)="deleteBug($event)"
+        (updateEvent)="updateBug($event)"
+        (createEvent)="createBug($event)"
+      ></app-bugs-list>
+    </div>
+    <div class="col-md-4">
+      <app-bugs-list
+        title="In Progress"
+        cdkDropList
+        cdkDropListSortingDisabled
+        #doing="cdkDropList"
+        [cdkDropListConnectedTo]="[todo, done]"
+        [cdkDropListData]="doingBugs"
+        (cdkDropListDropped)="drop($event, 1)"
+        [bugs]="doingBugs"
+        (deleteEvent)="deleteBug($event)"
+        (updateEvent)="updateBug($event)"
+        (createEvent)="createBug($event)"
+      ></app-bugs-list>
+    </div>
+    <div class="col-md-4 p-0">
+      <app-bugs-list
+        title="Fixed"
+        cdkDropList
+        cdkDropListSortingDisabled
+        #done="cdkDropList"
+        [cdkDropListConnectedTo]="[todo, doing]"
+        [cdkDropListData]="doneBugs"
+        (cdkDropListDropped)="drop($event, 2)"
+        [bugs]="doneBugs"
+        (deleteEvent)="deleteBug($event)"
+        (updateEvent)="updateBug($event)"
+        (createEvent)="createBug($event)"
+      ></app-bugs-list>
+    </div>
   </div>
 </div>

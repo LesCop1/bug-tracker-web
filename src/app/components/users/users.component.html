@@ -1,0 +1,28 @@
+<h1 class="my-5">Users</h1>
+<div class="row" *ngIf="!loaded">
+  <div class="spinner-border mx-auto m-4" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="loaded">
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+        <li class="list-group-item d-flex align-items-center" *ngFor="let user of users">
+          <a class="text-dark d-inline-flex flex-row" [routerLink]="['/users', user.username]">
+            <span class="align-self-center">
+              <img class="border rounded-circle" src="https://picsum.photos/32" alt="" />
+            </span>
+            <span class="ml-3 d-flex flex-column">
+              <span class="font-weight-normal">{{ user.name }}<span class="text-muted" *ngIf="user.id === currentUser.id"> (you)</span></span>
+              <small class="text-muted font-weight-light">@{{ user.username }}</small>
+            </span>
+          </a>
+          <button class="ml-auto btn btn-sm btn-outline-info" (click)="editUser(user)"><fa-icon [icon]="faPen"></fa-icon></button>
+          <button class="ml-2 btn btn-sm btn-outline-danger" (click)="deleteUser(user)" [disabled]="user.id === currentUser.id"><fa-icon [icon]="faTrash"></fa-icon></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
